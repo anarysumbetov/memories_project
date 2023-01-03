@@ -7,11 +7,15 @@ import { useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
 
 import Icon from "./icon";
+import { signin, signup } from "../../actions/auth.js";
 import { AUTH } from "../../constants/actionTypes.js";
 import useStyles from "./styles.js";
 import Input from "./Input.js";
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+
 const Auth = () => {
+  const [form, setForm] = useState(initialState);
   const classes = useStyles();
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
@@ -20,17 +24,20 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
-  const handleSubmit = () => {
-
-  };
-
-  const handleChange = () => {
-
-  };
-
   const switchMode = () => {
+    setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignup) {
+      dispatch(signup(form, history));
+    } else {
+      dispatch(signin(form, history));
+    }
   };
 
   const googleSuccess = async (response) => {
@@ -57,6 +64,10 @@ const Auth = () => {
 
   const googleError = () => {
     console.log("Google Sign In was unsuccessful. Try again later");
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
   
   return (
