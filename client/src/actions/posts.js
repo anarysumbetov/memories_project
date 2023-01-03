@@ -28,7 +28,7 @@ export const updatePost = (id, post) => async (dispatch) => {
 
         dispatch({ type: UPDATE, payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log("updatePost error:", error);
     }
 }
 
@@ -38,7 +38,7 @@ export const likePost = (id) => async (dispatch) => {
 
         dispatch({ type: LIKE, payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log("likePost error:", error);
     }
 }
 
@@ -48,6 +48,6 @@ export const deletePost = (id) => async (dispatch) => {
 
         dispatch({ type: DELETE, payload: id });
     } catch (error) {
-        console.log(error.message);
+        console.log("deletePost error:", error);
     }
 }
