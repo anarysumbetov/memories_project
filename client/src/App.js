@@ -8,6 +8,8 @@ import Home from "./components/Home/Home.js";
 import Auth from "./components/Auth/Auth.js";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('profile'));
+
   return (
     <GoogleOAuthProvider clientId="372569767609-k3dgt3ttvnus7lj7ke95uga6197m85r3.apps.googleusercontent.com">
       <BrowserRouter>
@@ -18,7 +20,7 @@ function App() {
             <Route path="/posts" exact component={Home} />
             <Route path="/posts/search" exact component={Home} />
             <Route path="/posts/:id" exact component={PostDetails} />
-            <Route path="/auth" exact component={Auth} />
+            <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts" />)} />
           </Switch>
         </Container>
       </BrowserRouter>
