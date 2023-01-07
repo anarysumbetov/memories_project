@@ -6,11 +6,11 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import moment from "moment";
 
-import useStyles from "./styles.js";
 import { useDispatch } from "react-redux"; 
 import { useHistory } from 'react-router-dom';
 
 import { deletePost, likePost } from "../../../actions/posts.js";
+import useStyles from "./styles.js";
 
 const Post = ({ post, setCurrentId }) => {
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {
       };
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} raised elevation={6}>
             <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
             <div className={classes.overlay}>
                 <Typography variant="h6">{post.name}</Typography>
