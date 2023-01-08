@@ -7,7 +7,7 @@ import useStyles from "./styles.js";
 import { createPost, updatePost } from "../../actions/posts.js";
 
 const Form = ({ currentId, setCurrentId }) => {
-    const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
+    const [postData, setPostData] = useState({ title: '', message: '', tags: [], selectedFile: '' });
     const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const clear = () => {
         setCurrentId(0);
-        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
+        setPostData({ title: '', message: '', tags: [], selectedFile: '' });
     }
 
     useEffect(() => {
