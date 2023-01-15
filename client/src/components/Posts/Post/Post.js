@@ -37,7 +37,7 @@ const Post = ({ post, setCurrentId }) => {
     const openPost = (e) => {
         // dispatch(getPost(post._id, history));
 
-        history.push(`/posts/${post._id}`);
+        history.push(`/posts/${post?._id}`);
     };
 
     return (
@@ -54,7 +54,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
                 </div>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <div className={classes.overlay2}>
+                    <div className={classes.overlay2} name="edit">
                         <Button 
                             style={{ color: 'white' }} 
                             size="small" 
@@ -65,9 +65,9 @@ const Post = ({ post, setCurrentId }) => {
                     </div>
                 )}
                 <div className={classes.details}>
-                    <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
-                <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
+                <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
                 </CardContent>
@@ -77,7 +77,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
                         <DeleteIcon fontSize="small" />
                         Delete
                     </Button>
